@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo Move</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div id="logo"></div>
+</div>
+
+<script>
+document.addEventListener("click", function(event) {
+    // Check if the clicked element is the logo
+    if (event.target.id === "logo") {
+        return; // If clicked on the logo, do nothing
+    }
+
+    // Change the position of the logo to where the mouse was clicked
+    var logo = document.getElementById("logo");
+    var newPositionTop = event.clientY - logo.clientHeight / 2; // Adjust position relative to logo height
+    var newPositionLeft = event.clientX - logo.clientWidth / 2; // Adjust position relative to logo width
+
+    logo.style.top = newPositionTop + "px";
+    logo.style.left = newPositionLeft + "px";
+});
+</script>
+<script src="assets/script.js"></script>
+</body>
+</html>
