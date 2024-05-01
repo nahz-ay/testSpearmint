@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Logo Move</title>
-<link rel="stylesheet" href="/assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Move</title>
+    <link rel="stylesheet" href="/assets/style.css">
 </head>
+
 <body>
 
-<div class="container">
-    <div id="logo"></div>
-</div>
+    <div class="container">
+        <div id="logo"></div>
+    </div>
 
-<script>
-document.addEventListener("click", function(event) {
-    // Check if the clicked element is the logo
-    if (event.target.id === "logo") {
-        return; // If clicked on the logo, do nothing
-    }
+    <script>
+        document.addEventListener("click", function (event) {
+            // Check if the clicked element is the logo
+            if (event.target.id === "logo") {
+                return; // If clicked on the logo, do nothing
+            }
 
-    // Change the position of the logo to where the mouse was clicked
-    var logo = document.getElementById("logo");
-    var newPositionTop = event.clientY - logo.clientHeight / 2; // Adjust position relative to logo height
-    var newPositionLeft = event.clientX - logo.clientWidth / 2; // Adjust position relative to logo width
+            // Change the position of the logo to where the mouse was clicked
+            var logo = document.getElementById("logo");
+            var newPositionTop = event.clientY - logo.clientHeight / 2; // Adjust position relative to logo height
+            var newPositionLeft = event.clientX - logo.clientWidth / 2; // Adjust position relative to logo width
 
-    logo.style.top = newPositionTop + "px";
-    logo.style.left = newPositionLeft + "px";
-});
-</script>
+            // Calculate the distance between the click position and the logo's current position
+            var distanceX = event.clientX - logo.getBoundingClientRect().left - logo.clientWidth / 2;
+
+            // Flip the logo horizontally based on the click position
+            if (distanceX > 0) {
+                logo.style.transform = "scaleX(-1)"; // If clicked on the right side, maintain the default orientation
+            } else {
+                logo.style.transform = "scaleX(1)"; // If clicked on the left side, flip the logo horizontally
+            }
+
+            logo.style.top = newPositionTop + "px";
+            logo.style.left = newPositionLeft + "px";
+
+           
+
+        });
+    </script>
 </body>
+
 </html>
