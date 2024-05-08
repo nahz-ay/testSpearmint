@@ -16,11 +16,6 @@
 
     <script>
         document.addEventListener("click", function (event) {
-            // Check if the clicked element is the logo
-            if (event.target.id === "logo") {
-                return; // If clicked on the logo, do nothing
-            }
-
             // Change the position of the logo to where the mouse was clicked
             var logo = document.getElementById("logo");
             var newPositionTop = event.clientY - logo.clientHeight / 2; // Adjust position relative to logo height
@@ -30,17 +25,20 @@
             var distanceX = event.clientX - logo.getBoundingClientRect().left - logo.clientWidth / 2;
 
             // Flip the logo horizontally based on the click position
-            if (distanceX > 0) {
-                logo.style.transform = "scaleX(-1)"; // If clicked on the right side, maintain the default orientation
+            if (distanceX < 0) {
+                // If clicked on the left side, flip the logo horizontally to the left first
+                logo.style.transform = "scaleX(1)";
             } else {
-                logo.style.transform = "scaleX(1)"; // If clicked on the left side, flip the logo horizontally
+                // If clicked on the right side, maintain the default orientation
+                logo.style.transform = "scaleX(-1)";
             }
 
-            logo.style.top = newPositionTop + "px";
-            logo.style.left = newPositionLeft + "px";
-
-           
-
+            // Set a timeout to ensure the flipping animation completes before moving
+            setTimeout(function () {
+                // Move the logo after setting its orientation
+                logo.style.top = newPositionTop + "px";
+                logo.style.left = newPositionLeft + "px";
+            }, 1000); // Adjust the delay as needed for the flipping animation duration
         });
     </script>
 </body>
